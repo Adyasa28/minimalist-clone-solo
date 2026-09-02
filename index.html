@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimalist Clone</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="offerBar">
+        <div class="offer">
+          <h4>Upto 33% OFF + Freebies</h4>
+        </div>
+        <div class="offer">
+          <h4>Buy 2,Get 3rd Free</h4>
+        </div>
+        <div class="offer">
+          <h4>Build your own Bundle - Save an additional upto 15% off</h4>
+        </div>
+
+        <button class="prev1">&#10094;</button>
+        <button class="next1">&#10095;</button>
+      </div>
+
+      <nav class="navbar">
+        <div class="menu-icon">
+          <i class="fa-solid fa-bars" id="toggleBtn"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="logo">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274"
+          />
+        </div>
+
+        <ul class="navLink">
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Skin & Body Care</a></li>
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Baby Care</a></li>
+          <li><a href="#">AI Assistants</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+
+        <div id="megaMenu"></div>
+
+        <div class="nav-icons">
+          <div class="desktop-icons">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-user" id="userBtn"></i>
+          </div>
+          <i class="fa-regular fa-star"></i>
+          <div class="cartBox" id="cartBtn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span id="cartCount">0</span>
+          </div>
+        </div>
+      </nav>
+      <div id="menu">
+        <ul>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Skin & Body Care</a></li>
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Baby Care</a></li>
+          <li><a href="#">AI Assistants</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Account</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="carousel">
+        <div class="slide active">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/2500x600-1_1600x.jpg?v=1783426503"
+            alt=""
+          />
+        </div>
+
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/HomePageBanner_Desktop_Toner_1600x.jpg?v=1764929793"
+            alt=""
+          />
+        </div>
+
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Artboard_1_copy_14_c1aa145a-473c-474e-8a0a-65b4cbf823e6_1600x.jpg?v=1776431580"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Artboard_1_copy_9_2_1600x.jpg?v=1754393298"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/D_1600x.jpg?v=1771838451"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Website_Banner_op2_1600x.png?v=1785503778"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+
+      <div id="dots">
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+      </div>
+    </section>
+
+    <section class="best-sellers">
+      <h1>Our Best Sellers</h1>
+
+      <div class="product-container"></div>
+
+      <button class="viewAll">View All Products</button>
+    </section>
+
+    <section class="categories">
+      <h2>Shop by Category</h2>
+
+      <div class="category-wrapper">
+        <div class="category-container"></div>
+      </div>
+
+      <div class="slider">
+        <div class="slider-track">
+          <div class="slider-thumb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concerns">
+      <h1>Shop by Concern</h1>
+
+      <div class="concernCards">
+        <div class="concern-container"></div>
+      </div>
+
+      <div class="sliderBar">
+        <div class="sliderLine">
+          <div class="sliderMove"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="banner">
+      <img
+        src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/2500x1080_2.jpg?v=1776854026&width=1860"
+      />
+    </section>
+    <section class="banner">
+      <img
+        src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Try_Now_1.png?v=1728477494&width=1860"
+      />
+    </section>
+
+    <!-- 
+    <section class="routine"></section>-->
+
+    <section class="new-arrivals">
+      <h2>New Launches</h2>
+
+      <div class="new-product-container"></div>
+
+      <button class="viewAllNew">View All Products</button>
+    </section>
+
+    <section class="features"></section>
+
+    <section class="info-box">
+      <div class="box">
+        <img
+          src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/52-min.png?crop=center&height=840&v=1691497451&width=840"
+          alt=""
+        />
+
+        <div class="box-text">
+          <h2>Minimalist Trust Circle</h2>
+          <p>Earn & redeem MCash on every purchase</p>
+
+          <button>Show More</button>
+        </div>
+      </div>
+
+      <div class="box">
+        <img
+          src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Purple_Modern_Download_App_Instagram_Post_1.png?crop=center&height=840&v=1706874639&width=840"
+          alt=""
+        />
+
+        <div class="box-text">
+          <h2>Download Our App</h2>
+          <p>Get App Exclusive Discounts & Offers</p>
+
+          <button>Show More</button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Minimalist Clone</h3>
+          <p>
+            Science-backed skincare inspired by simplicity. Clean ingredients.
+            Effective results.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Best Sellers</a></li>
+            <li><a href="#">New Launches</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+
+          <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+
+          <p>
+            <i class="fa-solid fa-envelope"></i> support@minimalistclone.com
+          </p>
+
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="footer-bottom">
+        <p>© 2026 Minimalist Clone. All Rights Reserved.</p>
+        <p>Designed & Developed by Adyasa</p>
+      </div>
+    </footer>
+  </body>
+  <script src="script.js"></script>
+</html>

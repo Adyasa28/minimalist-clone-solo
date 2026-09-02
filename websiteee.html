@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimalist Clone</title>
+
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+}
+
+
+body{
+    background:#ffffff;
+    color:#222;
+    line-height:1.5;
+}
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+ul{
+    list-style:none;
+}
+.navbar{
+    height:80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 80px;
+    border-bottom:1px solid #e5e5e5;
+    background:white;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+.navLink{
+    display:flex;
+    gap:35px;
+}
+
+.navLink li a{
+    font-size:15px;
+    font-weight:500;
+    transition:.3s;
+}
+
+.navLink li a:hover{
+    color:#7d7d7d;
+}
+.nav-icons{
+    display:flex;
+    gap:25px;
+}
+
+.nav-icons i{
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.nav-icons i:hover{
+    color:#7d7d7d;
+}
+.menu-icon{
+    display:none;
+    font-size:24px;
+    cursor:pointer;
+}
+.desktop-icons{
+    display:flex;
+    gap:25px;
+}
+#menu{
+    position:absolute;
+    top:80px;
+    left:0;
+    width:100%;
+    background:white;
+    display:none;
+    box-shadow:0 5px 10px rgba(0,0,0,.1);
+    z-index: 1001;
+}
+
+#menu.show{
+    display:block;
+}
+
+#menu ul{
+    list-style:none;
+}
+
+#menu li{
+    padding:18px 25px;
+    border-bottom:1px solid #eee;
+}
+
+#menu a{
+    text-decoration:none;
+    color:#222;
+}
+
+@media (max-width:992px){
+
+      .navLink{
+        display:none;
+    }
+
+    .menu-icon{
+        display:flex;
+        gap:20px;
+        align-items:center;
+    }
+
+    .desktop-icons{
+        display:none;
+    }
+
+    .navbar{
+        padding:0 20px;
+    }
+}
+
+.offerBar{
+    background:rgb(219, 115, 24);
+    color:rgb(243, 243, 243);
+    height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+}
+
+.offer{
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transition: opacity .5s ease;
+    text-align: center;
+}
+
+.offer.active{
+    opacity: 1;
+}
+
+.prev1,
+.next1{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev1{
+    left: 15px;
+}
+
+.next1{
+    right: 15px;
+}
+
+.hero{
+    position:relative;
+    width:100%;
+    height:70vh;
+     min-height:250px;
+    max-height:600px;
+    overflow:hidden;
+}
+@media (max-width:992px){
+    .hero{
+        height:50vh;
+    }
+}
+
+@media (max-width:768px){
+    .hero{
+        height:40vh;
+    }
+}
+
+@media (max-width:480px){
+    .hero{
+        height:30vh;
+    }
+}
+
+.carousel{
+    position:relative;
+    width:100%;
+    height:100%;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity .5s ease;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide img{
+   width:100%;
+    height:100%;
+    object-fit:contain;
+    margin-top: 0px;
+}
+.prev,
+.next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    background: rgba(0,0,0,0.4);
+    color: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    
+    font-size: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.prev{
+    left:20px;
+}
+
+.next{
+    right:20px;
+}
+
+.prev:hover,
+.next:hover{
+    background: rgba(0,0,0,0.7);
+}
+#dots{
+    margin-top: 20px;
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    border-radius: 50%;
+    display:flex;
+    gap:10px;
+}
+
+.best-sellers h1{
+    margin: 20px 0;
+}
+.best-sellers{
+    padding:60px 80px;
+}
+
+.best-sellers h2{
+    margin-bottom:30px;
+    font-size:32px;
+}
+
+.product-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+}
+
+.card{
+    border:1px solid #ddd;
+    border-radius:10px;
+    overflow:hidden;
+    transition:.3s;
+    cursor:pointer;
+    background:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover{
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.card h3{
+    font-size:16px;
+    margin: 10px 15px 5px;
+}
+
+.card p{
+    color:#666;
+    font-size:13px;
+    margin: 0 15px 10px;
+}
+
+.card h4{
+    font-size:16px;
+    margin: 0 15px 15px;
+}
+
+button.buy{
+    width:100%;
+    padding:12px;
+    background:#111;
+    color:white;
+    border:none;
+    cursor:pointer;
+    margin-top:auto;
+}
+.viewAll{
+    display: block;
+    margin: 40px auto;
+    padding: 14px 32px;
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.banner{
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.banner img{
+    width: 90%;
+    display: block;
+    border-radius: 10px;
+}
+.best-sellers{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+    padding:60px 0;
+}
+.features{
+    padding:80px 10%;
+    text-align:center;
+}
+
+.features h1{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.features>p{
+    color:#666;
+    max-width:800px;
+    margin:0 auto 70px;
+}
+
+.feature-container{
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.feature-card{
+    flex:1;
+    min-width:220px;
+}
+
+.feature-card i{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+.feature-card h3{
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+.feature-card p{
+    color:#666;
+}
+
+.new-arrivals{
+    width:90%;
+    max-width:1400px;
+    margin:auto;
+    padding:60px 0;
+}
+
+.new-arrivals h2{
+    font-size:34px;
+    margin-bottom:30px;
+}
+
+.new-product-container{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+footer{
+    background:#1f1f1f;
+    color:#fff;
+    padding:60px 8% 20px;
+}
+
+.footer-container{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:40px;
+}
+
+.footer-column h3{
+    margin-bottom:20px;
+    font-size:20px;
+    font-weight:600;
+}
+
+.footer-column p{
+    color:#d1d1d1;
+    line-height:1.7;
+    margin-bottom:12px;
+    font-size:14px;
+}
+
+.footer-column ul{
+    list-style:none;
+    padding:0;
+}
+
+.footer-column ul li{
+    margin-bottom:12px;
+}
+
+.footer-column ul li a{
+    color:#d1d1d1;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:14px;
+}
+
+.footer-column ul li a:hover{
+    color:#fff;
+}
+
+.social-icons{
+    margin-top:15px;
+    display:flex;
+    gap:15px;
+}
+
+.social-icons a{
+    width:38px;
+    height:38px;
+    border:1px solid #555;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    transition:0.3s;
+}
+
+.social-icons a:hover{
+    background:#fff;
+    color:#1f1f1f;
+}
+
+footer hr{
+    margin:40px 0 20px;
+    border:none;
+    border-top:1px solid #444;
+}
+
+.footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:14px;
+    color:#b5b5b5;
+}
+
+@media (max-width:992px){
+
+    .footer-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width:576px){
+
+    .footer-container{
+        grid-template-columns:1fr;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+        text-align:center;
+    }
+}
+
+
+.categories{
+    width:90%;
+    max-width:1400px;
+    margin:80px auto;
+    text-align:center;
+}
+
+.categories h1{
+    font-size:40px;
+    margin-bottom:35px;
+}
+
+
+.category-wrapper{
+    overflow:hidden;
+    width:100%;
+}
+
+
+.category-container{
+    display:flex;
+    gap:20px;
+    transition:transform .5s ease;
+}
+
+
+.category-card{
+    min-width:calc(25% - 15px);
+    flex-shrink:0;
+    text-align:center;
+    cursor:pointer;
+    transition:transform .3s ease;
+}
+
+
+.category-card:hover{
+    transform:translateY(-8px);
+}
+
+
+.category-card img{
+    width:100%;
+    aspect-ratio:1;
+    object-fit:cover;
+    border-radius:10px;
+    transition:transform .3s ease;
+}
+
+.category-card:hover img{
+    transform:scaleY(.95);
+    transform-origin:top;
+}
+
+
+.category-card h3{
+    margin-top:18px;
+    font-size:26px;
+    font-weight:600;
+}
+
+
+.category-card p{
+    margin-top:6px;
+    color:#777;
+    font-size:16px;
+}
+
+
+.slider{
+    display:flex;
+    justify-content:center;
+    margin-top:35px;
+}
+
+.slider-track{
+    width:90px;
+    height:5px;
+    background:#d9d9d9;
+    border-radius:30px;
+    position:relative;
+    cursor:pointer;
+}
+
+.slider-thumb{
+    width:35px;
+    height:5px;
+    background:#111;
+    border-radius:30px;
+    position:absolute;
+    left:0;
+    top:0;
+    transition:.4s ease;
+}
+
+
+@media(max-width:992px){
+
+    .category-card{
+        min-width:calc(50% - 10px);
+    }
+
+    .categories h1{
+        font-size:32px;
+    }
+
+}
+
+@media(max-width:576px){
+
+    .category-card{
+        min-width:100%;
+    }
+
+    .categories h1{
+        font-size:28px;
+    }
+
+}
+
+/* ================= CONCERNS ================= */
+
+.concerns{
+    width:90%;
+    margin:80px auto;
+}
+
+.concerns h1{
+    font-size:40px;
+    margin-bottom:30px;
+    text-align: center;
+}
+
+.concern-wrapper{
+    overflow:hidden;
+    width:100%;
+}
+
+.concern-container{
+    display:flex;
+    gap:20px;
+    transition:0.5s ease;
+}
+
+.concern-card{
+    min-width:calc(25% - 15px);
+    text-align:center;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+
+.concern-card:hover{
+    transform:translateY(-6px);
+}
+
+.concern-card img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:8px;
+    transition:transform .3s ease;
+}
+
+.concern-card:hover img{
+    transform:scaleY(.95);
+    transform-origin:top;
+}
+
+.concern-card h3{
+    margin-top:15px;
+    font-size:24px;
+    font-weight:500;
+}
+
+/* Slider Bar */
+
+.concern-slider{
+    display:flex;
+    justify-content:center;
+    margin-top:25px;
+}
+
+.concern-track{
+    width:90px;
+    height:5px;
+    background:#d8d8d8;
+    border-radius:20px;
+    position:relative;
+    cursor:pointer;
+}
+
+.concern-thumb{
+    width:35px;
+    height:5px;
+    background:#111;
+    border-radius:20px;
+    position:absolute;
+    left:0;
+    transition:.5s;
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+    .concern-card{
+        min-width:calc(33.33% - 14px);
+    }
+}
+
+@media(max-width:768px){
+    .concern-card{
+        min-width:calc(50% - 10px);
+    }
+
+    .concerns h1{
+        font-size:32px;
+    }
+}
+
+@media(max-width:480px){
+    .concern-card{
+        min-width:100%;
+    }
+
+    .concerns h1{
+        font-size:28px;
+    }
+}
+    </style>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="offerBar">
+        <div class="offer">
+          <h4>Upto 33% OFF + Freebies</h4>
+        </div>
+        <div class="offer">
+          <h4>Buy 2,Get 3rd Free</h4>
+        </div>
+        <div class="offer">
+          <h4>Build your own Bundle - Save an additional upto 15% off</h4>
+        </div>
+
+        <button class="prev1">&#10094;</button>
+        <button class="next1">&#10095;</button>
+      </div>
+
+      <nav class="navbar">
+        <div class="menu-icon">
+          <i class="fa-solid fa-bars" id="toggleBtn"></i>
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+
+        <div class="logo">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Minimalist-Logo-PNG-Mid.png?v=1712743274"
+            alt="Minimalist Logo"
+          />
+        </div>
+
+        <ul class="navLink">
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Skin & Body Care</a></li>
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Baby Care</a></li>
+          <li><a href="#">AI Assistants</a></li>
+          <li><a href="#">Track Order</a></li>
+        </ul>
+
+        <div class="nav-icons">
+          <div class="desktop-icons">
+            <i class="fa-regular fa-heart"></i>
+            <i class="fa-solid fa-user" id="userBtn"></i>
+          </div>
+          <i class="fa-regular fa-star"></i>
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+      </nav>
+      <div id="menu">
+        <ul>
+          <li><a href="#">Shop</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Skin & Body Care</a></li>
+          <li><a href="#">Hair Care</a></li>
+          <li><a href="#">Baby Care</a></li>
+          <li><a href="#">AI Assistants</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="login.html">Account</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="carousel">
+        <div class="slide active">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/2500x600-1_1600x.jpg?v=1783426503"
+            alt=""
+          />
+        </div>
+
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/HomePageBanner_Desktop_Toner_1600x.jpg?v=1764929793"
+            alt=""
+          />
+        </div>
+
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Artboard_1_copy_14_c1aa145a-473c-474e-8a0a-65b4cbf823e6_1600x.jpg?v=1776431580"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Artboard_1_copy_9_2_1600x.jpg?v=1754393298"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/D_1600x.jpg?v=1771838451"
+            alt=""
+          />
+        </div>
+        <div class="slide">
+          <img
+            src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/https://beminimalist.co/cdn/shop/files/Website_Banner_op2_1600x.png?v=1785503778"
+            alt=""
+          />
+        </div>
+      </div>
+
+      <button class="prev">&#10094;</button>
+      <button class="next">&#10095;</button>
+
+      <div id="dots">
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+        <h1>.</h1>
+      </div>
+    </section>
+
+    <section class="best-sellers">
+      <h1>Our Best Sellers</h1>
+
+      <div class="product-container"></div>
+
+      <button class="viewAll">View All Products</button>
+    </section>
+
+    <section class="categories">
+      <h2>Shop by Category</h2>
+
+      <div class="category-wrapper">
+        <div class="category-container"></div>
+      </div>
+
+      <div class="slider">
+        <div class="slider-track">
+          <div class="slider-thumb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="concerns">
+      <h1>Shop by Concern</h1>
+
+      <div class="concern-wrapper">
+        <div class="concern-container"></div>
+      </div>
+
+      <div class="concern-slider">
+        <div class="concern-track">
+          <div class="concern-thumb"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="banner">
+      <img
+        src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/2500x1080_2.jpg?v=1776854026&width=1860"
+        alt="Banner 1"
+      />
+    </section>
+    <section class="banner">
+      <img
+        src="https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Try_Now_1.png?v=1728477494&width=1860"
+        alt="Banner 2"
+      />
+    </section>
+
+    <section class="new-arrivals">
+      <h2>New Launches</h2>
+
+      <div class="new-product-container"></div>
+
+      <button class="viewAll">View All Products</button>
+    </section>
+
+    <section class="features"></section>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Minimalist Clone</h3>
+          <p>
+            Science-backed skincare inspired by simplicity. Clean ingredients.
+            Effective results.
+          </p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Best Sellers</a></li>
+            <li><a href="#">New Launches</a></li>
+            <li><a href="#">Track Order</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+
+          <p><i class="fa-solid fa-phone"></i> +91 98765 43210</p>
+
+          <p>
+            <i class="fa-solid fa-envelope"></i> support@minimalistclone.com
+          </p>
+
+          <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="footer-bottom">
+        <p>© 2026 Minimalist Clone. All Rights Reserved.</p>
+        <p>Designed & Developed by Adyasa</p>
+      </div>
+    </footer>
+  </body>
+  <script >
+    // Mobile menu toggle
+const button = document.getElementById("toggleBtn");
+const box = document.getElementById("menu");
+
+button.addEventListener("click", () => {
+  box.classList.toggle("show");
+
+  if (box.classList.contains("show")) {
+    button.classList.remove("fa-bars");
+    button.classList.add("fa-xmark");
+  } else {
+    button.classList.remove("fa-xmark");
+    button.classList.add("fa-bars");
+  }
+});
+
+// Navigate to login from header user button
+const userBtn = document.getElementById("userBtn");
+if (userBtn) {
+  userBtn.addEventListener("click", () => {
+    window.location.href = "login.html";
+  });
+}
+
+// Hero Carousel Slider
+let next = document.querySelector(".next");
+let prev = document.querySelector(".prev");
+let dots = document.querySelectorAll("#dots>h1");
+const slides = document.querySelectorAll(".slide");
+let index = 0;
+
+function showSlide(i) {
+  slides.forEach((slide) => {
+    slide.classList.remove("active");
+  });
+
+  slides[i].classList.add("active");
+
+  // Update dots indicator colors
+  dots.forEach((dot, dIdx) => {
+    if (dIdx === i) {
+      dot.style.color = "black";
+    } else {
+      dot.style.color = "grey";
+    }
+  });
+}
+
+// Initialize slider state
+showSlide(index);
+
+next.addEventListener("click", () => {
+  index++;
+  if (index >= slides.length) {
+    index = 0;
+  }
+  showSlide(index);
+});
+
+prev.addEventListener("click", () => {
+  index--;
+  if (index < 0) {
+    index = slides.length - 1;
+  }
+  showSlide(index);
+});
+
+// Auto-play for hero carousel (Optional - uncomment to enable)
+// setInterval(() => {
+//   index++;
+//   if(index >= slides.length) { index = 0; }
+//   showSlide(index);
+// }, 5000);
+
+
+// Announcement Bar / Offer Slider
+const offers = document.querySelectorAll(".offer");
+const nextOfferBtn = document.querySelector(".next1");
+const prevOfferBtn = document.querySelector(".prev1");
+let currentOffer = 0;
+
+function showOffer(idx) {
+  offers.forEach((offer) => {
+    offer.classList.remove("active");
+  });
+  offers[idx].classList.add("active");
+}
+
+showOffer(currentOffer);
+
+function handleNextOffer() {
+  currentOffer++;
+  if (currentOffer >= offers.length) {
+    currentOffer = 0;
+  }
+  showOffer(currentOffer);
+}
+
+function handlePrevOffer() {
+  currentOffer--;
+  if (currentOffer < 0) {
+    currentOffer = offers.length - 1;
+  }
+  showOffer(currentOffer);
+}
+
+if (nextOfferBtn) nextOfferBtn.addEventListener("click", handleNextOffer);
+if (prevOfferBtn) prevOfferBtn.addEventListener("click", handlePrevOffer);
+
+// Automatically slide offers every 4 seconds
+setInterval(handleNextOffer, 4000);
+
+
+// Dynamic Products - Best Sellers
+const products = [
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/SalicylicCleanserNew.jpg?crop=center&height=540&v=1756796206&width=360",
+    name: "Salicylic Acid + LHA 2% Cleanser",
+    desc: "Acne, Breakouts & Oiliness",
+    price: "₹ 285",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/SPF50New.jpg?crop=center&height=540&v=1756795782&width=360",
+    name: "SPF 50 Sunscreen",
+    desc: "Sun protection, UV exposure/damage",
+    price: "₹ 380",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/products/B5Moisturizer1200-2-min.png?crop=center&height=540&v=1756800645&width=360",
+    name: "Vitamin B5 10% Moisturizer",
+    desc: "Damaged Barrier, Oily & Dehydrated",
+    price: "₹ 332",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Nia10New.png?crop=center&height=630&v=1721398127&width=420",
+    name: "Niacinamide 10% Face Serum",
+    desc: "Acne Control",
+    price: "₹ 499",
+  },
+];
+
+const container = document.querySelector(".product-container");
+products.forEach((product) => {
+  let card = document.createElement("div");
+  card.className = "card";
+
+  let img = document.createElement("img");
+  img.src = product.image;
+
+  let title = document.createElement("h3");
+  title.innerText = product.name;
+
+  let desc = document.createElement("p");
+  desc.innerText = product.desc;
+
+  let price = document.createElement("h4");
+  price.innerText = product.price;
+
+  let btn = document.createElement("button");
+  btn.className = "buy";
+  btn.innerText = "Add to Cart";
+
+  card.append(img, title, desc, price, btn);
+  container.appendChild(card);
+});
+
+
+// Features Section
+const data = [
+  {
+    icon: "fa-solid fa-circle-half-stroke",
+    title: "Transparency",
+    desc: "Full disclosure of ingredients used & their concentration",
+  },
+  {
+    icon: "fa-solid fa-flask",
+    title: "Efficacy",
+    desc: "Formulations developed in our in-house laboratories",
+  },
+  {
+    icon: "fa-solid fa-eye-dropper",
+    title: "Affordable",
+    desc: "Skincare, accessible to all",
+  },
+  {
+    icon: "fa-solid fa-earth-americas",
+    title: "Only the best",
+    desc: "Ingredients sourced from across the world",
+  },
+];
+
+const featureSection = document.querySelector(".features");
+const heading = document.createElement("h1");
+heading.innerText = "The future of personal care is here";
+
+const para = document.createElement("p");
+para.innerText = "Embrace Minimalist, where each element is chosen for its scientific merit, offering you authentic, effective skincare solutions.";
+
+featureSection.append(heading, para);
+
+const featureContainer = document.createElement("div");
+featureContainer.className = "feature-container";
+
+data.forEach((item) => {
+  const card = document.createElement("div");
+  card.className = "feature-card";
+
+  const icon = document.createElement("i");
+  icon.className = item.icon;
+
+  const title = document.createElement("h3");
+  title.innerText = item.title;
+
+  const desc = document.createElement("p");
+  desc.innerText = item.desc;
+
+  card.append(icon, title, desc);
+  featureContainer.append(card);
+});
+featureSection.append(featureContainer);
+
+
+// Dynamic Products - New Launches
+const newProducts = [
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Artboard_1_copy_13_1.jpg?crop=center&height=630&v=1776762556&width=420",
+    name: "Hydrating Factors 7.3% Hair Shampoo",
+    desc: "Manage dry, dull & frizzy hair",
+    price: "₹ 475",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/MultiRepairListing.jpg?crop=center&height=720&v=1762515398&width=480",
+    name: "Multi Repair Actives 15% Face Serum",
+    desc: "Brightens & firms skin, repairs barrier",
+    price: "₹ 665",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/ListingMarulaOil05.jpg?crop=center&height=630&v=1760096773&width=420",
+    name: "Marula Oil 05% Cleansing Oil",
+    desc: "Removes oils & impurities, leaves skin clean.",
+    price: "₹ 570",
+  },
+];
+
+const newContainer = document.querySelector(".new-product-container");
+newProducts.forEach((product) => {
+  const card = document.createElement("div");
+  card.className = "card";
+
+  const img = document.createElement("img");
+  img.src = product.image;
+
+  const title = document.createElement("h3");
+  title.innerText = product.name;
+
+  const desc = document.createElement("p");
+  desc.innerText = product.desc;
+
+  const price = document.createElement("h4");
+  price.innerText = product.price;
+
+  const btn = document.createElement("button");
+  btn.className = "buy";
+  btn.innerText = "Add to Cart";
+
+  card.append(img, title, desc, price, btn);
+  newContainer.append(card);
+});
+
+
+// Category Dynamic Generation and Slider
+const categories = [
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/1707202320-67ef6468516dd5c6.png?crop=center&height=180&v=1707202328&width=240",
+    title: "Skin Care",
+    sub: "Skin",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/1706099761-f86e95709c7aaba4.png?crop=center&height=180&v=1706099767&width=240",
+    title: "Hair Care",
+    sub: "Hair",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/1706099804-80666e6d221da1a8.png?crop=center&height=180&v=1706099810&width=240",
+    title: "Body Care",
+    sub: "Bath & Body",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/1707202423-7af38ee9fbec530d.png?crop=center&height=180&v=1707202432&width=240",
+    title: "Lip Care",
+    sub: "Lip",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/1706099885-2900ece1f743c65a.png?crop=center&height=180&v=1706099891&width=240",
+    title: "Eye Care",
+    sub: "Eye",
+  },
+];
+
+const categoryContainer = document.querySelector(".category-container");
+
+// Render category elements in HTML container
+categories.forEach((item) => {
+  const card = document.createElement("div");
+  card.className = "category-card";
+
+  const img = document.createElement("img");
+  img.src = item.image;
+
+  const title = document.createElement("h3");
+  title.innerText = item.title;
+
+  const sub = document.createElement("p");
+  sub.innerText = item.sub;
+
+  card.append(img, title, sub);
+  categoryContainer.appendChild(card);
+});
+
+// Category Slider Navigation Interaction
+const categoryThumb = document.querySelector(".slider-thumb");
+let isCategorySlid = false;
+
+if (categoryThumb) {
+  categoryThumb.addEventListener("click", () => {
+    if (!isCategorySlid) {
+      categoryContainer.style.transform = "translateX(-20%)";
+      categoryThumb.style.left = "55px";
+      isCategorySlid = true;
+    } else {
+      categoryContainer.style.transform = "translateX(0)";
+      categoryThumb.style.left = "0";
+      isCategorySlid = false;
+    }
+  });
+}
+
+
+// Concern Dynamic Generation and Slider
+const concerns = [
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Uneven_Tone_or_Pigmentation-min.png?crop=center&height=180&v=1710248322&width=240",
+    title: "Uneven Tone",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Acne-min.png?crop=center&height=180&v=1710248322&width=240",
+    title: "Acne Control",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Oiliness-min.png?crop=center&height=180&v=1710248324&width=240",
+    title: "Oiliness",
+  },
+  {
+    image: "https://sfycdn.speedsize.com/56385b25-4e17-4a9a-9bec-c421c18686fb/beminimalist.co/cdn/shop/files/Fine_Lines_Wrinkles-min.png?crop=center&height=180&v=1710248319&width=240",
+    title: "Fine Lines / Wrinkles",
+  },
+];
+
+const concernContainer = document.querySelector(".concern-container");
+
+concerns.forEach((item) => {
+  const card = document.createElement("div");
+  card.className = "concern-card";
+
+  card.innerHTML = `
+        <img src="${item.image}">
+        <h3>${item.title}</h3>
+    `;
+  concernContainer.append(card);
+});
+
+// Concern Slider Navigation Interaction
+const concernThumb = document.querySelector(".concern-thumb");
+let isConcernSlid = false;
+
+if (concernThumb && concernContainer) {
+  concernThumb.addEventListener("click", () => {
+    if (!isConcernSlid) {
+      // Moves content horizontally if overflow/responsiveness requires it
+      concernContainer.style.transform = "translateX(-20%)";
+      concernThumb.style.left = "55px";
+      isConcernSlid = true;
+    } else {
+      concernContainer.style.transform = "translateX(0)";
+      concernThumb.style.left = "0";
+      isConcernSlid = false;
+    }
+  });
+}
+  </script>
+
+</html>

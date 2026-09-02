@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .registerBox {
+        width: 420px;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .registerBox h1 {
+        text-align: center;
+        margin-bottom: 8px;
+      }
+
+      .registerBox p {
+        text-align: center;
+        color: gray;
+        margin-bottom: 25px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      input {
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        outline: none;
+        transition: 0.3s;
+      }
+
+      input:focus {
+        border-color: black;
+      }
+
+      button {
+        padding: 14px;
+        background: black;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #333;
+      }
+
+      .loginText {
+        margin-top: 25px;
+        text-align: center;
+      }
+
+      .loginText a {
+        text-decoration: none;
+        color: #e67e22;
+        font-weight: 600;
+      }
+
+      .loginText a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg">
+      <img src="layered-waves-haikei.png" alt="" />
+    </div>
+
+    <div class="registerBox">
+      <h1>Create Account</h1>
+      <p>Join Minimalist</p>
+
+      <form>
+        <input type="text" id="name" placeholder="Full Name" />
+
+        <input type="email" id="email" placeholder="Email Address" />
+
+        <input type="tel" id="phone" placeholder="Phone Number" />
+
+        <input type="password" id="password" placeholder="Password" />
+
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+        />
+
+        <button type="submit" id="registerBtn">Create Account</button>
+      </form>
+
+      <p class="loginText">
+        Already have an account?
+        <a href="login.html">Login</a>
+      </p>
+    </div>
+  </body>
+  <script>
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let name = document.getElementById("name").value;
+      let email = document.getElementById("email").value;
+      let phone = document.getElementById("phone").value;
+      let password = document.getElementById("password").value;
+      let confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (
+        name === "" ||
+        email === "" ||
+        phone === "" ||
+        password === "" ||
+        confirmPassword === ""
+      ) {
+        alert("Please fill all the fields.");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Check if email already exists
+      let alreadyExists = users.find(function (user) {
+        return user.email === email;
+      });
+
+      if (alreadyExists) {
+        alert("Account already exists. Please login.");
+
+        window.location.href = "login.html";
+
+        return;
+      }
+
+      let newUser = {
+        name: name,
+        email: email,
+        phone: phone,
+        password: password,
+      };
+
+      users.push(newUser);
+
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("Registration Successful!");
+
+      window.location.href = "login.html";
+    });
+  </script>
+</html>

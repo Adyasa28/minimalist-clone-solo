@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .loginbg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+
+      .loginbg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .login-box {
+        width: 380px;
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .login-box h1 {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .login-box p {
+        text-align: center;
+        color: gray;
+        margin-bottom: 25px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      input {
+        padding: 14px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        font-size: 15px;
+      }
+
+      input:focus {
+        border-color: black;
+      }
+
+      button {
+        padding: 14px;
+        border: none;
+        background: black;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background: #333;
+      }
+
+      .signup {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      .signup a {
+        text-decoration: none;
+        color: #e67e22;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loginbg">
+      <img src="layered-waves-haikei.png" alt="" />
+    </div>
+
+    <div class="login-box">
+      <h1>Welcome Back</h1>
+      <p>Login to your account</p>
+
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required />
+
+        <input type="password" id="password" placeholder="Password" required />
+
+        <button id="loginBtn" type="submit">Login</button>
+      </form>
+
+      <p class="signup">
+        Don't have an account?
+        <a href="registration.html">Create Account</a>
+      </p>
+    </div>
+  </body>
+  <script>
+    const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    let foundUser = users.find(function(user){
+
+        return user.email === email &&
+               user.password === password;
+
+    });
+
+    if(foundUser){
+
+        alert("Login Successful");
+
+        localStorage.setItem(
+            "currentUser",
+            JSON.stringify(foundUser)
+        );
+
+        window.location.href = "index.html";
+
+    }
+
+    else{
+
+        alert("Invalid Email or Password");
+
+    }
+
+});
+  </script>
+</html>

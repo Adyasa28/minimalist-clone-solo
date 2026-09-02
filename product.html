@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product</title>
+
+
+
+<style>
+
+.productPage{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+    display:flex;
+    gap:60px;
+    align-items:center;
+}
+
+.productPage img{
+    width:450px;
+    border-radius:12px;
+}
+
+.details{
+    flex:1;
+}
+
+.details h1{
+    font-size:38px;
+    margin-bottom:20px;
+}
+
+.details p{
+    margin:20px 0;
+    line-height:1.7;
+    color:#555;
+
+}
+#desc{
+    font-size: x-large;
+    color: black;
+}
+
+.details h2{
+    margin:20px 0;
+}
+
+.details button{
+    padding:15px 35px;
+    background:black;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:18px;
+}
+
+.details button:hover{
+    background:#333;
+}
+.topBar{
+    width:90%;
+    max-width:1200px;
+    margin:30px auto 0;
+}
+
+#homeBtn{
+    padding:10px 20px;
+    background:white;
+    border:1px solid #222;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    transition:.3s;
+}
+
+#homeBtn:hover{
+    background:#111;
+    color:white;
+}
+#popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:30px;
+    width:320px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    display:none;
+    text-align:center;
+    z-index:1000;
+    
+}
+
+#popup h3{
+    margin-bottom:20px;
+}
+
+#popup button{
+    margin:8px;
+    padding:12px 18px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#111;
+    color:white;
+}
+
+#popup button:hover{
+    background:#333;
+}
+
+</style>
+
+</head>
+<body>
+
+    <div class="topBar">
+    <button id="homeBtn">← Back to Home</button>
+</div>
+
+<div class="productPage">
+
+    <img id="image">
+
+    <div class="details">
+
+        <h1 id="name"></h1>
+
+        <p id="desc"></p>
+        <p id="desc1"></p>
+
+        <h2 id="price"></h2>
+
+        <button id="cartBtn">
+            Add to Cart
+        </button>
+
+    </div>
+    <div id="popup">
+    <h3>✅ Product Added to Cart</h3>
+    <button id="continueShopping">Continue Shopping</button>
+    <button id="goCart">Go to Cart</button>
+</div>
+
+</div>
+
+<script >
+ 
+    let product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+document.getElementById("image").src = product.image;
+
+document.getElementById("name").innerText = product.name;
+
+document.getElementById("desc").innerText = product.desc;
+document.getElementById("desc1").innerText = product.desc1;
+
+document.getElementById("price").innerText = product.price;
+
+document.getElementById("cartBtn").onclick = function(){
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push(product);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    document.getElementById("popup").style.display = "block";
+
+};
+document.getElementById("homeBtn").onclick = function(){
+
+    window.location.href = "index.html";
+
+};
+document.getElementById("continueShopping").onclick = function(){
+
+    window.location.href = "index.html";
+
+};
+
+document.getElementById("goCart").onclick = function(){
+
+    window.location.href = "cart.html";
+
+};
+</script>
+
+</body>
+</html>

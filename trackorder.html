@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Track Order</title>
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f6f6f6;
+}
+
+h1{
+    text-align:center;
+    margin:40px 0;
+    font-size:40px;
+}
+
+#orderContainer{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    padding-bottom:50px;
+}
+
+.orderCard{
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+.orderCard img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.orderInfo{
+    flex:1;
+    margin-left:25px;
+}
+
+.orderInfo h2{
+    font-size:24px;
+    margin-bottom:10px;
+}
+
+.orderInfo p{
+    color:#666;
+    margin-bottom:8px;
+}
+
+.status{
+    color:green;
+    font-weight:bold;
+}
+
+@media(max-width:768px){
+
+.orderCard{
+    flex-direction:column;
+    text-align:center;
+}
+
+.orderInfo{
+    margin-left:0;
+    margin-top:20px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<h1>Your Orders</h1>
+
+<div id="orderContainer"></div>
+
+
+
+</body>
+<script >
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+const container = document.getElementById("orderContainer");
+
+if(orders.length===0){
+
+    container.innerHTML=`
+    <h2 style="text-align:center;">
+    No Orders Yet
+    </h2>
+    `;
+
+}
+else{
+
+orders.forEach((item)=>{
+
+    let card=document.createElement("div");
+    card.className="orderCard";
+
+    card.innerHTML=`
+
+    <img src="${item.image}">
+
+    <div class="orderInfo">
+
+    <h2>${item.name}</h2>
+
+    <p>${item.price}</p>
+
+    <p class="status">Order Confirmed ✅</p>
+
+    </div>
+
+    `;
+
+    container.append(card);
+
+});
+
+}
+</script>
+</html>

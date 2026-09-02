@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+}
+
+/* Heading */
+
+h1{
+    text-align:center;
+    margin:40px 0;
+    font-size:40px;
+    font-weight:600;
+}
+
+/* Cart Container */
+
+#cartContainer{
+    width:90%;
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* Product Card */
+
+.card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:white;
+    border-radius:10px;
+    padding:20px;
+    box-shadow:0 5px 12px rgba(0,0,0,.08);
+}
+
+.card img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.card h3{
+    flex:1;
+    margin-left:25px;
+    font-size:22px;
+    font-weight:500;
+}
+
+.card h4{
+    font-size:22px;
+    margin-right:30px;
+}
+
+/* Remove Button */
+
+.card button{
+    padding:10px 22px;
+    background:#111;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#444;
+}
+
+/* Total */
+
+#totalPrice{
+    width:90%;
+    max-width:1100px;
+    margin:40px auto 20px;
+    text-align:right;
+    font-size:30px;
+}
+
+/* Place Order */
+
+#placeOrderBtn{
+    display:block;
+    margin:0 auto 60px;
+    padding:15px 40px;
+    background:black;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:17px;
+    transition:.3s;
+}
+
+#placeOrderBtn:hover{
+    background:#333;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .card{
+        flex-direction:column;
+        text-align:center;
+        gap:18px;
+    }
+
+    .card h3{
+        margin-left:0;
+    }
+
+    .card h4{
+        margin-right:0;
+    }
+
+    #totalPrice{
+        text-align:center;
+        font-size:24px;
+    }
+}
+
+.buttonBox{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.removeBtn{
+    background:#e74c3c;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.removeBtn:hover{
+    background:#c0392b;
+}
+
+.orderBtn{
+    background:#111;
+    color:white;
+    border:none;
+    padding:10px 18px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.orderBtn:hover{
+    background:#333;
+}
+    </style>
+
+
+</head>
+<body>
+
+    <h1>Your Cart</h1>
+
+    <div id="cartContainer"></div>
+
+    <h2 id="totalPrice"></h2>
+
+    <button id="placeOrderBtn">
+        Place Order
+    </button>
+
+<script >
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+let cartContainer = document.getElementById("cartContainer");
+
+let total = 0;
+
+cart.forEach((item, index) => {
+
+    let card = document.createElement("div");
+    card.className = "card";
+
+    let img = document.createElement("img");
+    img.src = item.image;
+
+    let title = document.createElement("h3");
+    title.innerText = item.name;
+
+    let price = document.createElement("h4");
+    price.innerText = item.price;
+
+    // Button container
+    let buttonBox = document.createElement("div");
+    buttonBox.className = "buttonBox";
+
+    // Remove Button
+    let removeBtn = document.createElement("button");
+    removeBtn.innerText = "Remove";
+    removeBtn.className = "removeBtn";
+
+    removeBtn.onclick = function () {
+
+        cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        location.reload();
+
+    };
+
+    // Place Order Button
+    let orderBtn = document.createElement("button");
+    orderBtn.innerText = "Place Order";
+    orderBtn.className = "orderBtn";
+
+   orderBtn.onclick = function () {
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+   
+    orders.push(item);
+
+   
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+  
+    cart.splice(index, 1);
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Order Placed Successfully!");
+
+    window.location.href = "trackorder.html";
+};
+
+    buttonBox.append(removeBtn, orderBtn);
+
+    card.append(img, title, price, buttonBox);
+
+    cartContainer.append(card);
+
+    total += Number(item.price.replace("₹",""));
+
+});
+document.getElementById("totalPrice").innerText =
+"Total : ₹" + total;
+
+document.getElementById("placeOrderBtn").onclick = function () {
+
+    if(cart.length === 0){
+        alert("Your cart is empty!");
+        return;
+    }
+
+    let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders.push(...cart);
+
+    localStorage.setItem("orders", JSON.stringify(orders));
+
+    localStorage.removeItem("cart");
+
+    alert("All Orders Placed Successfully!");
+
+    window.location.href = "trackorder.html";
+
+};
+</script>
+
+</body>
+</html>
